@@ -55,7 +55,7 @@ AppAsset::register($this);
                 ]],
             /*MODULO VENTAS*/
             ['label' => 'Ventas', 'items' =>[
-                ['label' => 'Ventas', 'url' => ['/ventas/index']],
+                ['label' => 'Ventas', 'url' => ['/venta/index']],
                 ]],
                 /*
             ['label' => 'Home', 'url' => ['/site/index']],
