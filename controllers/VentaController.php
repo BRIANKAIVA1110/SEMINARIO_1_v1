@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Articulo;
-use app\models\ArticuloSearch;
+use app\models\Venta;
+use app\models\VentaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ArticuloController implements the CRUD actions for Articulo model.
+ * VentaController implements the CRUD actions for Venta model.
  */
-class ArticuloController extends Controller
+class VentaController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Lists all Articulo models.
+     * Lists all Venta models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticuloSearch();
+        $searchModel = new VentaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Displays a single Articulo model.
+     * Displays a single Venta model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Creates a new Articulo model.
+     * Creates a new Venta model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Articulo();
+        $model = new Venta();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ArticuloId]);
+            return $this->redirect(['view', 'id' => $model->VentaId]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,7 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Updates an existing Articulo model.
+     * Updates an existing Venta model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +87,7 @@ class ArticuloController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ArticuloId]);
+            return $this->redirect(['view', 'id' => $model->VentaId]);
         }
 
         return $this->render('update', [
@@ -96,7 +96,7 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Deletes an existing Articulo model.
+     * Deletes an existing Venta model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ArticuloController extends Controller
     }
 
     /**
-     * Finds the Articulo model based on its primary key value.
+     * Finds the Venta model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Articulo the loaded model
+     * @return Venta the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Articulo::findOne($id)) !== null) {
+        if (($model = Venta::findOne($id)) !== null) {
             return $model;
         }
 

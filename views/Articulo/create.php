@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulo */
 
-$this->title = 'Create Articulo';
+$this->title = 'Agregar Articulo';
 $this->params['breadcrumbs'][] = ['label' => 'Articulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,5 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+    
 
 </div>
