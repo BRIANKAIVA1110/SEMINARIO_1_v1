@@ -19,6 +19,7 @@ class ArticuloSearch extends Articulo
         return [
             [['ArticuloId', 'ModeloId', 'ColorId'], 'integer'],
             [['Descripcion', 'CodigoBarras'], 'safe'],
+            [['modelo', 'color'], 'string'],
         ];
     }
 
@@ -41,6 +42,7 @@ class ArticuloSearch extends Articulo
     public function search($params)
     {
         $query = Articulo::find();
+        $query->joinWith(['modelo', 'color']);
 
         // add conditions that should always apply here
 
