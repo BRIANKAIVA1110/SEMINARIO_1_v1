@@ -64,7 +64,8 @@ class ClienteSearch extends Cliente
         $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'Domicilio', $this->Domicilio]);
+            ->andFilterWhere(['like', 'Domicilio', $this->Domicilio])
+            ->andFilterWhere(['like', 'Domicilio', $this->FechaNacimiento]);
 
         return $dataProvider;
     }

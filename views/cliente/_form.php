@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,6 +19,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Domicilio')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'FechaNacimiento')->widget(DatePicker::classname(), [
+        'options' => ['placeholder' => 'Seleccione Fecha Nacimiento ...'],
+        'pluginOptions' => [
+            'format' => 'dd-M-yyyy',
+		    'todayHighlight' => true
+        ]
+    ]);?>
+   
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

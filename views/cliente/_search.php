@@ -24,7 +24,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email') ?>
 
     <?= $form->field($model, 'Domicilio') ?>
-
+    <?= $form->field($model, 'FechaNacimiento')->widget(DatePicker::classname(), [
+        'options' => ['placeholder' => 'Seleccione Fecha Nacimiento ...'],
+        'pluginOptions' => [
+            'format' => 'dd-M-yyyy',
+		    'todayHighlight' => true
+        ]
+    ]);?>
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Modelo;
 use app\models\Color;
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Articulo */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,7 +20,7 @@ use app\models\Color;
     <?= $form->field($model, 'Descripcion')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'CodigoBarras')->textInput(['maxlength' => true]) ?>
-
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

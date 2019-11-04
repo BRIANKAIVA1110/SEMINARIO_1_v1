@@ -12,7 +12,7 @@ use Yii;
  * @property string $Apellido
  * @property string $email
  * @property string $Domicilio
- *
+ * @property Date FechaNacimiento
  * @property Venta[] $ventas
  */
 class Cliente extends \yii\db\ActiveRecord
