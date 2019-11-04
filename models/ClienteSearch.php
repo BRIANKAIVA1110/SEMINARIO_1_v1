@@ -24,7 +24,7 @@ class ClienteSearch extends Cliente
         return [
             [['ClienteId'], 'integer'],
             [['Nombre', 'Apellido', 'email', 'Domicilio'], 'safe'],
-            ['FechaNacimiento','string'],
+            ['fechaNacimiento','string'],
         ];
     }
 
@@ -54,6 +54,10 @@ class ClienteSearch extends Cliente
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['fechaNacimiento'] = [
+            'asc' => ['FechaNacimiento' => SORT_ASC],
+            'desc' => ['FechaNacimiento' => SORT_DESC],
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -71,7 +75,7 @@ class ClienteSearch extends Cliente
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'Domicilio', $this->Domicilio])
-            ->andFilterWhere(['like', 'FechaNacimiento', $this->FechaNacimiento]);
+            ->andFilterWhere(['like', 'FechaNacimiento', $this->getAttribute('fechaNacimiento')]);
             
 
         return $dataProvider;
