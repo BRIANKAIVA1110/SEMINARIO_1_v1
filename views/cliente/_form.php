@@ -19,11 +19,12 @@ use kartik\date\DatePicker;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Domicilio')->textInput(['maxlength' => true]) ?>
+    
     <?= $form->field($model, 'FechaNacimiento')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Seleccione Fecha Nacimiento ...'],
         'pluginOptions' => [
-            'format' => 'dd-M-yyyy',
-		    'todayHighlight' => true
+            'format' => 'yyyy-mm-dd',
+		    'todayHighlight' => false
         ]
     ]);?>
    

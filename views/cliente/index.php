@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ClienteSearch */
@@ -31,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'Apellido',
             'email:email',
             'Domicilio',
-            'FechaNacimiento',
+            [
+                'attribute' => 'fechaNacimiento',//solo es una key
+                'label'=>'Fecha Nacimiento',
+                'value' => 'FechaNacimiento',//valor de modelo 
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

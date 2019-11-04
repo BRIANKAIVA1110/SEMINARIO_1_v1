@@ -11,6 +11,11 @@ use app\models\Cliente;
  */
 class ClienteSearch extends Cliente
 {
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+       return array_merge(parent::attributes(), ['fechaNacimiento']);//para que no rompa en rules.
+    }
     /**
      * {@inheritdoc}
      */
@@ -19,6 +24,7 @@ class ClienteSearch extends Cliente
         return [
             [['ClienteId'], 'integer'],
             [['Nombre', 'Apellido', 'email', 'Domicilio'], 'safe'],
+            ['FechaNacimiento','string'],
         ];
     }
 
@@ -65,7 +71,8 @@ class ClienteSearch extends Cliente
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'Domicilio', $this->Domicilio])
-            ->andFilterWhere(['like', 'Domicilio', $this->FechaNacimiento]);
+            ->andFilterWhere(['like', 'FechaNacimiento', $this->FechaNacimiento]);
+            
 
         return $dataProvider;
     }

@@ -24,10 +24,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email') ?>
 
     <?= $form->field($model, 'Domicilio') ?>
+    
     <?= $form->field($model, 'FechaNacimiento')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Seleccione Fecha Nacimiento ...'],
         'pluginOptions' => [
-            'format' => 'dd-M-yyyy',
+            'format' => 'yyyy-mm-dd',
 		    'todayHighlight' => true
         ]
     ]);?>
