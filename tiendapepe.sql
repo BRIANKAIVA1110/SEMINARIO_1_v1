@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2019 a las 09:14:20
+-- Tiempo de generación: 04-11-2019 a las 08:35:10
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -43,20 +43,8 @@ CREATE TABLE `articulo` (
 INSERT INTO `articulo` (`ArticuloId`, `ModeloId`, `ColorId`, `Descripcion`, `CodigoBarras`) VALUES
 (1, 1, 1, 'asd', 'asdasdasd'),
 (2, 10, 3, 'qaz', 'qazqaz'),
-(3, 9, 2, 'asd', 'eeeeeeeeee');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `articuloxventas`
---
-
-CREATE TABLE `articuloxventas` (
-  `ArticuloXVentaId` int(11) NOT NULL,
-  `ArticuloId` int(11) NOT NULL,
-  `VentaId` int(11) NOT NULL,
-  `Cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(3, 9, 2, 'asd', 'eeeeeeeeee'),
+(4, 10, 3, 'azulpepe', 'aaa-aa-aa');
 
 -- --------------------------------------------------------
 
@@ -69,15 +57,20 @@ CREATE TABLE `cliente` (
   `Nombre` varchar(100) NOT NULL,
   `Apellido` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `Domicilio` varchar(100) NOT NULL
+  `Domicilio` varchar(100) NOT NULL,
+  `FechaNacimiento` date NOT NULL,
+  `Telefono` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`ClienteId`, `Nombre`, `Apellido`, `email`, `Domicilio`) VALUES
-(1, 'Pepe', 'Perez', 'pepe@pepe.com', 'av. pepe 123');
+INSERT INTO `cliente` (`ClienteId`, `Nombre`, `Apellido`, `email`, `Domicilio`, `FechaNacimiento`, `Telefono`) VALUES
+(1, 'Pepe', 'Perez', 'pepe@pepe.com', 'av. pepe 123', '2019-01-15', '1111111111'),
+(2, 'Brian', 'Villarroel', 'villarrarroelbrian1110@gmail.com', 'calle 123', '1997-10-11', '1111111111'),
+(3, 'Pepe2', 'Pepe2', 'Pepe2@hotmail.com', 'Pepe2 123', '0000-00-00', NULL),
+(5, 'Pepe2', 'Perez', 'pepe@pepe.com', 'av. pepe 123', '2019-11-03', NULL);
 
 -- --------------------------------------------------------
 
@@ -98,7 +91,8 @@ CREATE TABLE `color` (
 INSERT INTO `color` (`ColorId`, `Codigo`, `Descripcion`) VALUES
 (1, '00001', 'Rojo'),
 (2, '00002', 'Verde'),
-(3, '00003', 'Azul');
+(3, '00003', 'Azul'),
+(6, '00004', 'Violeta');
 
 -- --------------------------------------------------------
 
@@ -117,13 +111,14 @@ CREATE TABLE `modelo` (
 --
 
 INSERT INTO `modelo` (`ModeloId`, `Codigo`, `Descripcion`) VALUES
-(1, '00001', 'Modelo1'),
+(1, '00001', 'Jeans'),
 (2, '00002', 'Modelo2'),
 (6, '00003', 'Modelo3'),
 (7, '00004', 'Modelo4'),
 (8, '00005', 'Modelo5'),
 (9, '00006', 'Modelo6'),
-(10, '00007', 'Modelo7');
+(10, '00007', 'Modelo7'),
+(11, '00008', 'Remera');
 
 -- --------------------------------------------------------
 
@@ -176,14 +171,6 @@ ALTER TABLE `articulo`
   ADD KEY `artiulos_colorId` (`ColorId`);
 
 --
--- Indices de la tabla `articuloxventas`
---
-ALTER TABLE `articuloxventas`
-  ADD PRIMARY KEY (`ArticuloXVentaId`),
-  ADD KEY `ArticuloXVentas_ArticuloId` (`ArticuloId`),
-  ADD KEY `ArticuloXVentas_VentaId` (`VentaId`);
-
---
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -231,31 +218,25 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `articulo`
 --
 ALTER TABLE `articulo`
-  MODIFY `ArticuloId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `articuloxventas`
---
-ALTER TABLE `articuloxventas`
-  MODIFY `ArticuloXVentaId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ArticuloId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ClienteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ClienteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `color`
 --
 ALTER TABLE `color`
-  MODIFY `ColorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ColorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `modelo`
 --
 ALTER TABLE `modelo`
-  MODIFY `ModeloId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ModeloId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `precio`
@@ -285,13 +266,6 @@ ALTER TABLE `venta`
 ALTER TABLE `articulo`
   ADD CONSTRAINT `artiulos_colorId` FOREIGN KEY (`ColorId`) REFERENCES `color` (`ColorId`),
   ADD CONSTRAINT `artiulos_modeloId` FOREIGN KEY (`ModeloId`) REFERENCES `modelo` (`ModeloId`);
-
---
--- Filtros para la tabla `articuloxventas`
---
-ALTER TABLE `articuloxventas`
-  ADD CONSTRAINT `ArticuloXVentas_ArticuloId` FOREIGN KEY (`ArticuloId`) REFERENCES `articulo` (`ArticuloId`),
-  ADD CONSTRAINT `ArticuloXVentas_VentaId` FOREIGN KEY (`VentaId`) REFERENCES `venta` (`VentaId`);
 
 --
 -- Filtros para la tabla `precio`
