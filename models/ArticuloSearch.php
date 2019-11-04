@@ -5,12 +5,19 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Articulo;
+use app\models\Modelo;
+use app\models\Color;
 
 /**
  * ArticuloSearch represents the model behind the search form of `app\models\Articulo`.
  */
 class ArticuloSearch extends Articulo
 {
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+       return array_merge(parent::attributes(), ['ModeloDescripcion','ColorDescripcion']);//para que no rompa en rules.
+    }
     /**
      * {@inheritdoc}
      */
@@ -19,7 +26,7 @@ class ArticuloSearch extends Articulo
         return [
             [['ArticuloId', 'ModeloId', 'ColorId'], 'integer'],
             [['Descripcion', 'CodigoBarras'], 'safe'],
-            [['modelo', 'color'], 'string'],
+            [['ModeloDescripcion', 'ColorDescripcion'], 'string'],
         ];
     }
 
@@ -50,12 +57,13 @@ class ArticuloSearch extends Articulo
             'query' => $query,
         ]);
         
-        //sort atributos relacionados
-        $dataProvider->sort->attributes['modelo'] = [
+        //sort atributos de datagrid ej: 'attribute' => 'ModeloDescripcion'
+        //este atributo o key "contendra" en "campo" del modelo
+        $dataProvider->sort->attributes['ModeloDescripcion'] = [
             'asc' => ['modelo.Descripcion' => SORT_ASC],
             'desc' => ['modelo.Descripcion' => SORT_DESC],
         ];
-        $dataProvider->sort->attributes['color'] = [
+        $dataProvider->sort->attributes['ColorDescripcion'] = [
             'asc' => ['color.Descripcion' => SORT_ASC],
             'desc' => ['color.Descripcion' => SORT_DESC],
         ];
@@ -75,9 +83,11 @@ class ArticuloSearch extends Articulo
             // 'ColorId' => $this->ColorId,
         ]);
 
-        $query->andFilterWhere(['like', 'Descripcion', $this->Descripcion])
-            ->andFilterWhere(['like', 'CodigoBarras', $this->CodigoBarras]);
-        // $query->andFilterWhere(['like', 'modelo.Descripcion', $this->modelo.Descripcion]);
+        $query->andFilterWhere(['like', 'Articulo.Descripcion', $this->Descripcion])
+            ->andFilterWhere(['like', 'Articulo.CodigoBarras', $this->CodigoBarras])
+            /*lo que venga por la key*/
+            ->andFilterWhere(['like', 'modelo.Descripcion', $this->getAttribute('ModeloDescripcion')])
+            ->andFilterWhere(['like', 'color.Descripcion', $this->getAttribute('ColorDescripcion')]);      
         
         return $dataProvider;
     }

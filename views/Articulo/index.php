@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,21 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'ArticuloId',
             // 'ModeloId',
             [
-                'attribute' => 'modelo',
+                'attribute' => 'ModeloDescripcion',//solo es una key
                 'label'=> 'Modelo',
-                'value' => 'modelo.Descripcion',
+                'value' => 'modelo.Descripcion',//valor de modelo
                 
             ],
-            // 'modelo.Descripcion',
             // 'ColorId',
             [
-                'attribute' => 'color',
+                'attribute' => 'ColorDescripcion',//solo es una key
                 'label'=>'Color',
-                'value' => 'color.Descripcion'
+                'value' => 'color.Descripcion'//valor de modelo
             ],
             'Descripcion',
             'CodigoBarras',
