@@ -30,11 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'ModeloId',
             [
                 'attribute' => 'modelo',
-                'value' => 'modelo.Descripcion'
+                'label'=> 'Modelo',
+                'value' => 'modelo.Descripcion',
+                
             ],
+            // 'modelo.Descripcion',
             // 'ColorId',
             [
                 'attribute' => 'color',
+                'label'=>'Color',
                 'value' => 'color.Descripcion'
             ],
             'Descripcion',

@@ -49,6 +49,16 @@ class ArticuloSearch extends Articulo
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        
+        //sort atributos relacionados
+        $dataProvider->sort->attributes['modelo'] = [
+            'asc' => ['modelo.Descripcion' => SORT_ASC],
+            'desc' => ['modelo.Descripcion' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['color'] = [
+            'asc' => ['color.Descripcion' => SORT_ASC],
+            'desc' => ['color.Descripcion' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -61,13 +71,14 @@ class ArticuloSearch extends Articulo
         // grid filtering conditions
         $query->andFilterWhere([
             'ArticuloId' => $this->ArticuloId,
-            'ModeloId' => $this->ModeloId,
-            'ColorId' => $this->ColorId,
+            // 'ModeloId' => $this->ModeloId,
+            // 'ColorId' => $this->ColorId,
         ]);
 
         $query->andFilterWhere(['like', 'Descripcion', $this->Descripcion])
             ->andFilterWhere(['like', 'CodigoBarras', $this->CodigoBarras]);
-
+        // $query->andFilterWhere(['like', 'modelo.Descripcion', $this->modelo.Descripcion]);
+        
         return $dataProvider;
     }
 }
