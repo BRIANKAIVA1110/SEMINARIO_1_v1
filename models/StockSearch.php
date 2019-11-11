@@ -11,6 +11,11 @@ use app\models\Stock;
  */
 class StockSearch extends Stock
 {
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+       return array_merge(parent::attributes(), ['articuloDescripcion']);//para que no rompa en rules.
+    }
     /**
      * {@inheritdoc}
      */
@@ -18,6 +23,7 @@ class StockSearch extends Stock
     {
         return [
             [['StockId', 'ArticuloId', 'Cantidad'], 'integer'],
+            [['articuloDescripcion'], 'string'],
         ];
     }
 
@@ -40,12 +46,18 @@ class StockSearch extends Stock
     public function search($params)
     {
         $query = Stock::find();
-
+        $query->joinWith(['articulo']);
         // add conditions that should always apply here
+        
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['articuloDescripcion'] = [
+            'asc' => ['articulo.Descripcion' => SORT_ASC],
+            'desc' => ['articulo.Descripcion' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -58,9 +70,10 @@ class StockSearch extends Stock
         // grid filtering conditions
         $query->andFilterWhere([
             'StockId' => $this->StockId,
-            'ArticuloId' => $this->ArticuloId,
+            // 'ArticuloId' => $this->ArticuloId,
             'Cantidad' => $this->Cantidad,
         ]);
+        $query->andFilterWhere(['like', 'articulo.Descripcion', $this->getAttribute('articuloDescripcion')]);      
 
         return $dataProvider;
     }

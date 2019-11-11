@@ -42,7 +42,7 @@ class Stock extends \yii\db\ActiveRecord
     {
         return [
             'StockId' => 'Stock ID',
-            'ArticuloId' => 'Articulo ID',
+            'ArticuloId' => 'Articulo',
             'Cantidad' => 'Cantidad',
         ];
     }

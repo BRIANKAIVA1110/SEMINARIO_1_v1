@@ -27,7 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'StockId',
-            'ArticuloId',
+            [
+                'attribute' => 'articuloDescripcion',//solo es una key
+                'label'=> 'Articulo',
+                'value' => 'articulo.Descripcion',//valor de modelo
+                
+            ],
             'Cantidad',
 
             ['class' => 'yii\grid\ActionColumn'],
