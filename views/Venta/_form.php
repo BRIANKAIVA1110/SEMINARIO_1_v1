@@ -49,6 +49,13 @@ use app\models\Precio;
         if(articuloId!=0 || articuloId!=undefined)
             var cantidad = document.getElementById("venta-cantidad").value;
             document.getElementById("venta-total").value= cantidad*50;
+        // alert(
+        <?php 
+            $Precio = Precio::find('ArticuloId=1')->one();
+            $Precio['Precio'];
+        ?>
+        
+        
 
     }
 </script>
