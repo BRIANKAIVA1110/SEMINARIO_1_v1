@@ -19,6 +19,7 @@ use Yii;
  */
 class Venta extends \yii\db\ActiveRecord
 {
+    public $Precio;
     /**
      * {@inheritdoc}
      */
