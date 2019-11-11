@@ -54,8 +54,5 @@ use app\models\Precio;
             $Precio = Precio::find('ArticuloId=1')->one();
             $Precio['Precio'];
         ?>
-        
-        
-
     }
 </script>
