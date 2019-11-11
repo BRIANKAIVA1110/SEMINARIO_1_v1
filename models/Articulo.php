@@ -53,8 +53,8 @@ class Articulo extends \yii\db\ActiveRecord
     {
         return [
             'ArticuloId' => 'Articulo ID',
-            'ModeloId' => 'Modelo ID',
-            'ColorId' => 'Color ID',
+            'ModeloId' => 'Modelo',
+            'ColorId' => 'Color',
             'Descripcion' => 'Descripcion',
             'CodigoBarras' => 'Codigo Barras',
         ];

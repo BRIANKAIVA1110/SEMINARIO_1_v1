@@ -24,13 +24,15 @@ use kartik\date\DatePicker;
         'options' => ['placeholder' => 'Seleccione Fecha Nacimiento ...'],
         'pluginOptions' => [
             'format' => 'yyyy-mm-dd',
-		    'todayHighlight' => false
+            'todayHighlight' => true,
+            'startDate' => '1930-01-01',
+            'endDate' => date('Y-m-d'),
         ]
     ]);?>
    
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
