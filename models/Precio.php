@@ -43,7 +43,7 @@ class Precio extends \yii\db\ActiveRecord
     {
         return [
             'PrecioId' => 'Precio ID',
-            'ArticuloId' => 'Articulo ID',
+            'ArticuloId' => 'Articulo',
             'Precio' => 'Precio',
         ];
     }

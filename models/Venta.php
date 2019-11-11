@@ -47,8 +47,8 @@ class Venta extends \yii\db\ActiveRecord
     {
         return [
             'VentaId' => 'Venta ID',
-            'ClienteId' => 'Cliente ID',
-            'ArticuloId' => 'Articulo ID',
+            'ClienteId' => 'Cliente',
+            'ArticuloId' => 'Articulo',
             'Cantidad' => 'Cantidad',
             'Total' => 'Total',
         ];

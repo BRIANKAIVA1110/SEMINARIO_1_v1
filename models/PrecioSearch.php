@@ -11,6 +11,11 @@ use app\models\Precio;
  */
 class PrecioSearch extends Precio
 {
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+       return array_merge(parent::attributes(), ['articuloDescripcion']);//para que no rompa en rules.
+    }
     /**
      * {@inheritdoc}
      */
@@ -19,6 +24,7 @@ class PrecioSearch extends Precio
         return [
             [['PrecioId', 'ArticuloId'], 'integer'],
             [['Precio'], 'number'],
+            [['articuloDescripcion'], 'string'],
         ];
     }
 
@@ -41,6 +47,7 @@ class PrecioSearch extends Precio
     public function search($params)
     {
         $query = Precio::find();
+        $query->joinWith(['articulo']);
 
         // add conditions that should always apply here
 
@@ -48,6 +55,10 @@ class PrecioSearch extends Precio
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['articuloDescripcion'] = [
+            'asc' => ['articulo.Descripcion' => SORT_ASC],
+            'desc' => ['articulo.Descripcion' => SORT_DESC],
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -62,6 +73,7 @@ class PrecioSearch extends Precio
             'ArticuloId' => $this->ArticuloId,
             'Precio' => $this->Precio,
         ]);
+        $query->andFilterWhere(['like', 'articulo.Descripcion', $this->getAttribute('articuloDescripcion')]);      
 
         return $dataProvider;
     }

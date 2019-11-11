@@ -11,6 +11,11 @@ use app\models\Venta;
  */
 class VentaSearch extends Venta
 {
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+       return array_merge(parent::attributes(), ['clienteDescripcion','articuloDescripcion']);//para que no rompa en rules.
+    }
     /**
      * {@inheritdoc}
      */
@@ -18,6 +23,7 @@ class VentaSearch extends Venta
     {
         return [
             [['VentaId', 'ClienteId', 'ArticuloId', 'Cantidad', 'Total'], 'integer'],
+            [['clienteDescripcion','articuloDescripcion'], 'string'],
         ];
     }
 
@@ -40,12 +46,22 @@ class VentaSearch extends Venta
     public function search($params)
     {
         $query = Venta::find();
+        $query->joinWith(['cliente', 'articulo']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->sort->attributes['clienteDescripcion'] = [
+            'asc' => ['cliente.Nombre' => SORT_ASC],
+            'desc' => ['cliente.Nombre' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['articuloDescripcion'] = [
+            'asc' => ['articulo.Descripcion' => SORT_ASC],
+            'desc' => ['articulo.Descripcion' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -58,12 +74,14 @@ class VentaSearch extends Venta
         // grid filtering conditions
         $query->andFilterWhere([
             'VentaId' => $this->VentaId,
-            'ClienteId' => $this->ClienteId,
-            'ArticuloId' => $this->ArticuloId,
+            // 'ClienteId' => $this->ClienteId,
+            // 'ArticuloId' => $this->ArticuloId,
             'Cantidad' => $this->Cantidad,
             'Total' => $this->Total,
         ]);
-
+        $query->andFilterWhere(['like', 'articulo.Descripcion', $this->getAttribute('articuloDescripcion')]);      
+        $query->andFilterWhere(['like', 'cliente.Nombre', $this->getAttribute('clienteDescripcion')]);      
+    
         return $dataProvider;
     }
 }
